@@ -17,10 +17,6 @@ startup
       [FieldOffset(0x14)] public int BtlStart;
       [FieldOffset(0x18)] public int BtlEnd;
       [FieldOffset(0x1C)] public int StoryEnd;
-      [FieldOffset(0x20)] public float GameFrame;
-      [FieldOffset(0x24)] public float RealTime;
-      [FieldOffset(0x28)] public float BtlFrame;
-      [FieldOffset(0x2C)] public float BtlTime;
     }
     ");
 }
@@ -51,7 +47,6 @@ update
   current.Data = vars.GetCurrentAutoSplitterData();
   current.BtlStart = current.Data.BtlStart;
   current.BtlEnd = current.Data.BtlEnd;
-  current.BtlTime = current.Data.BtlTime;
 }
 
 start
@@ -66,5 +61,5 @@ split
 
 isLoading
 {
-  return current.BtlTime <= old.BtlTime;
+  return current.BtlStart == 0 || current.BtlEnd == 1;
 }
